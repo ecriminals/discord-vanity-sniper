@@ -25,7 +25,7 @@ class Client:
         if vanity != None:
             base = self.session.get(
                 f"https://discord.com/api/v9/invites/{vanity}",
-                headers=Client.headers(self),
+                headers=self.headers(self),
             ).text
 
         if "vanity_url_code" in base:
@@ -34,7 +34,7 @@ class Client:
         elif "Unknown Invite" in base:
             snipe = self.session.patch(
                 f"https://discord.com/api/v9/guilds/{self.id}/vanity-url",
-                headers=Client.headers(self),
+                headers=self.headers(self),
                 json={"code": vanity},
             ).text
 
